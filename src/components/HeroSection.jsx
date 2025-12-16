@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function HeroSection({ openModal = () => {} }) {
+function HeroSection({ openModal }) {
   const [callStatus, setCallStatus] = useState(
     "Click to start a web call with our AI agent"
   );
@@ -212,7 +212,7 @@ function HeroSection({ openModal = () => {} }) {
                 style={{ marginTop: "1.5rem" }}
               >
                 <button
-                  onClick={() => {}}
+                  onClick={openModal}
                   className="btn-primary"
                   style={{
                     padding: "0.75rem 1.25rem",

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Header({ openLoginModal }) {
+function Header({ openLoginModal, openAppointmentModal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -114,6 +114,7 @@ function Header({ openLoginModal }) {
                 Log in
               </button>
               <button
+                onClick={openAppointmentModal}
                 className="btn-primary px-4 py-2 rounded-xl text-white font-semibold"
                 style={{
                   borderRadius: "0.75rem",
@@ -207,6 +208,7 @@ function Header({ openLoginModal }) {
                   Log in
                 </button>
                 <button
+                  onClick={openAppointmentModal}
                   className="flex-1 px-4 py-2 text-center rounded-xl text-white font-semibold"
                   style={{
                     borderRadius: "0.75rem",

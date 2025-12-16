@@ -11,14 +11,19 @@ import FAQSection from "./components/FAQSection";
 import CTASection from "./components/CTASection";
 import Footer from "./components/Footer";
 import BookingModal from "./components/BookingModal";
+import BookAppointmentModal from "./components/BookAppointmentModal";
 import LoginPage from "./components/LoginPage";
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [appointmentModalOpen, setAppointmentModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
+  
+  const openAppointmentModal = () => setAppointmentModalOpen(true);
+  const closeAppointmentModal = () => setAppointmentModalOpen(false);
   
   const openLoginModal = () => setLoginModalOpen(true);
   const closeLoginModal = () => setLoginModalOpen(false);
@@ -42,8 +47,8 @@ function App() {
         <LoginPage onClose={closeLoginModal} />
       ) : (
         <>
-          <Header openLoginModal={openLoginModal} />
-          <HeroSection />
+          <Header openLoginModal={openLoginModal} openAppointmentModal={openAppointmentModal} />
+          <HeroSection openModal={openAppointmentModal} />
           <TrustedCompanies />
           <FeaturesSection />
           <UseCasesSection />
@@ -56,6 +61,9 @@ function App() {
           
           {/* Global Booking Modal */}
           <BookingModal isOpen={modalOpen} onClose={closeModal} />
+          
+          {/* Global Book Appointment Modal */}
+          <BookAppointmentModal isOpen={appointmentModalOpen} onClose={closeAppointmentModal} />
         </>
       )}
     </div>
