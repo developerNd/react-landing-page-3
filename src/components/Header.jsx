@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Header() {
+function Header({ openLoginModal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -62,8 +62,8 @@ function Header() {
         <nav
           style={{
             width: "100%",
-            paddingLeft: "clamp(1rem, 5vw, 4rem)",
-            paddingRight: "clamp(1rem, 5vw, 4rem)",
+            paddingLeft: "clamp(1.5rem, 3vw, 4rem)",
+            paddingRight: "clamp(1.5rem, 3vw, 4rem)",
           }}
         >
           <div
@@ -101,22 +101,26 @@ function Header() {
 
             {/* Desktop CTA Buttons */}
             <div className="hidden md:flex items-center gap-3">
-              <a
-                href="https://app.callmira.ai/user"
+              <button
+                onClick={openLoginModal}
                 className="btn-secondary px-4 py-2 rounded-xl border border-black/10"
                 style={{
                   borderRadius: "0.75rem",
                   borderColor: "rgba(0, 0, 0, 0.1)",
+                  background: "transparent",
+                  cursor: "pointer",
                 }}
               >
                 Log in
-              </a>
+              </button>
               <button
                 className="btn-primary px-4 py-2 rounded-xl text-white font-semibold"
                 style={{
                   borderRadius: "0.75rem",
                   backgroundColor: "#6366f1",
                   boxShadow: "0 10px 15px -3px rgba(99, 102, 241, 0.2)",
+                  border: "none",
+                  cursor: "pointer",
                 }}
               >
                 Book appointment
@@ -190,21 +194,25 @@ function Header() {
                 FAQ
               </a>
               <div className="flex gap-2 pt-2">
-                <a
-                  href="https://app.callmira.ai/user/login?redirect=%2Fuser"
+                <button
+                  onClick={openLoginModal}
                   className="flex-1 px-4 py-2 text-center rounded-xl border border-black/10"
                   style={{
                     borderRadius: "0.75rem",
                     borderColor: "rgba(0, 0, 0, 0.1)",
+                    background: "transparent",
+                    cursor: "pointer",
                   }}
                 >
                   Log in
-                </a>
+                </button>
                 <button
                   className="flex-1 px-4 py-2 text-center rounded-xl text-white font-semibold"
                   style={{
                     borderRadius: "0.75rem",
                     backgroundColor: "#6366f1",
+                    border: "none",
+                    cursor: "pointer",
                   }}
                 >
                   Get started

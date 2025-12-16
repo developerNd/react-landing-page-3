@@ -44,7 +44,7 @@ function Footer() {
         }}
       >
         <div
-          style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 1rem" }}
+          style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 clamp(1.5rem, 5vw, 1rem)" }}
         >
           <div className="footer-grid">
             {/* Logo and Description */}
@@ -113,7 +113,6 @@ function Footer() {
                     className="footer-link"
                     style={{
                       fontSize: "0.875rem",
-
                       textDecoration: "none",
                     }}
                   >
@@ -126,7 +125,6 @@ function Footer() {
                     className="footer-link"
                     style={{
                       fontSize: "0.875rem",
-
                       textDecoration: "none",
                     }}
                   >
@@ -139,7 +137,6 @@ function Footer() {
                     className="footer-link"
                     style={{
                       fontSize: "0.875rem",
-
                       textDecoration: "none",
                     }}
                   >
@@ -211,7 +208,6 @@ function Footer() {
                     className="footer-link"
                     style={{
                       fontSize: "0.875rem",
-
                       textDecoration: "none",
                     }}
                   >
@@ -224,7 +220,6 @@ function Footer() {
                     className="footer-link"
                     style={{
                       fontSize: "0.875rem",
-
                       textDecoration: "none",
                     }}
                   >

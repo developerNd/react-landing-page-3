@@ -62,12 +62,12 @@ function CTASection() {
         }}
       >
         <div
-          style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 1rem" }}
+          style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 clamp(1.5rem, 5vw, 1rem)" }}
         >
           <div
             style={{
               borderRadius: "1.5rem",
-              padding: "3rem 2rem",
+              padding: "clamp(1.5rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem)",
               border: "1px solid rgba(0, 0, 0, 0.1)",
               backgroundColor: "rgba(255, 255, 255, 0.7)",
               backdropFilter: "blur(10px)",

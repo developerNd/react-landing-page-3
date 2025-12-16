@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function HeroSection() {
+function HeroSection({ openModal = () => {} }) {
   const [callStatus, setCallStatus] = useState(
     "Click to start a web call with our AI agent"
   );
@@ -10,8 +10,9 @@ function HeroSection() {
   useEffect(() => {
     // Set initial values
     const checkSize = () => {
-      setIsMobile(window.innerWidth < 640);
-      setIsTablet(window.innerWidth < 768);
+      const width = window.innerWidth;
+      setIsMobile(width < 640);
+      setIsTablet(width >= 640 && width < 1024);
     };
 
     checkSize();
@@ -39,7 +40,7 @@ function HeroSection() {
           overflow: hidden;
         }
         
-        .gradient-text {
+        .hero-gradient-text {
           background: linear-gradient(to right, #4f46e5, #c026d3, #10b981);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -186,7 +187,7 @@ function HeroSection() {
                 }}
               >
                 Never miss a lead. Book more showings.{" "}
-                <span className="gradient-text">AI calls that close</span>
+                <span className="hero-gradient-text">AI calls that close</span>
               </h1>
 
               {/* Description */}
@@ -211,6 +212,7 @@ function HeroSection() {
                 style={{ marginTop: "1.5rem" }}
               >
                 <button
+                  onClick={() => {}}
                   className="btn-primary"
                   style={{
                     padding: "0.75rem 1.25rem",
@@ -248,9 +250,9 @@ function HeroSection() {
               style={{
                 flex: "0 0 auto",
                 width: "100%",
-                maxWidth: isTablet ? "340px" : "440px",
-                marginRight: isTablet ? "auto" : "6rem",
-                marginLeft: isTablet ? "auto" : "auto",
+                maxWidth: isMobile ? "90%" : isTablet ? "480px" : "440px",
+                marginRight: isMobile ? "auto" : isTablet ? "auto" : "6rem",
+                marginLeft: "auto",
                 marginTop: isTablet ? "2rem" : "3rem",
                 position: "relative",
               }}
@@ -275,7 +277,11 @@ function HeroSection() {
               <div
                 className="relative mx-auto"
                 style={{
-                  width: isMobile ? "300px" : "360px",
+                  width: isMobile
+                    ? "min(340px, 90vw)"
+                    : isTablet
+                    ? "380px"
+                    : "360px",
                   filter: "drop-shadow(0 10px 30px rgba(236, 72, 153, 0.12))",
                 }}
               >
@@ -480,7 +486,12 @@ function HeroSection() {
                   transform: isMobile
                     ? "translate(-50%, 79%)"
                     : "translate(-50%, 79%)",
-                  width: isMobile ? "95%" : "105%",
+                  width: isMobile
+                    ? "min(95vw, 400px)"
+                    : isTablet
+                    ? "105%"
+                    : "105%",
+                  maxWidth: isTablet ? "420px" : "none",
                   marginRight: isTablet ? "0" : "1.5rem",
                 }}
               >
@@ -497,10 +508,8 @@ function HeroSection() {
                 >
                   <div
                     style={{
-                      padding: isMobile
-                        ? "0.625rem 0.875rem"
-                        : "0.75rem 1.25rem",
-                      fontSize: isMobile ? "0.625rem" : "0.688rem",
+                      padding: isMobile ? "0.75rem 1rem" : "0.75rem 1.25rem",
+                      fontSize: isMobile ? "0.688rem" : "0.688rem",
                       color: "rgba(52, 211, 153, 0.9)",
                       textAlign: "left",
                     }}
@@ -514,10 +523,8 @@ function HeroSection() {
                   <div
                     className="console-conversation"
                     style={{
-                      padding: isMobile
-                        ? "0 0.875rem 0.75rem"
-                        : "0 1.25rem 1rem",
-                      fontSize: isMobile ? "0.688rem" : "0.75rem",
+                      padding: isMobile ? "0 1rem 1rem" : "0 1.25rem 1rem",
+                      fontSize: isMobile ? "0.75rem" : "0.75rem",
                       fontFamily:
                         'Consolas, ui-monospace, SFMono-Regular, Menlo, Monaco, "Liberation Mono", "Courier New", monospace',
                       fontWeight: "400",
@@ -578,12 +585,10 @@ function HeroSection() {
                   <div
                     style={{
                       borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-                      padding: isMobile
-                        ? "0.625rem 0.875rem"
-                        : "0.75rem 1.25rem",
+                      padding: isMobile ? "0.75rem 1rem" : "0.75rem 1.25rem",
                       display: "grid",
                       gridTemplateColumns: "repeat(2, 1fr)",
-                      gap: isMobile ? "0.5rem" : "0.75rem",
+                      gap: isMobile ? "0.625rem" : "0.75rem",
                     }}
                   >
                     <button
@@ -594,12 +599,12 @@ function HeroSection() {
                       }
                       className="console-button"
                       style={{
-                        padding: "0.5rem 0.75rem",
+                        padding: "0.625rem 0.75rem",
                         borderRadius: "0.5rem",
                         backgroundColor: "rgba(255, 255, 255, 0.1)",
                         border: "1px solid rgba(255, 255, 255, 0.1)",
                         color: "white",
-                        fontSize: isMobile ? "0.75rem" : "0.875rem",
+                        fontSize: isMobile ? "0.813rem" : "0.875rem",
                         cursor: "pointer",
                       }}
                     >
@@ -613,12 +618,12 @@ function HeroSection() {
                       }
                       className="console-button"
                       style={{
-                        padding: "0.5rem 0.75rem",
+                        padding: "0.625rem 0.75rem",
                         borderRadius: "0.5rem",
                         backgroundColor: "rgba(255, 255, 255, 0.1)",
                         border: "1px solid rgba(255, 255, 255, 0.1)",
                         color: "white",
-                        fontSize: isMobile ? "0.75rem" : "0.875rem",
+                        fontSize: isMobile ? "0.813rem" : "0.875rem",
                         cursor: "pointer",
                       }}
                     >
