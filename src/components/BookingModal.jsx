@@ -67,7 +67,6 @@ function BookingModal({ isOpen, onClose }) {
           justify-content: center;
           z-index: 9999;
           padding: 1rem;
-          overflow-y: auto;
         }
         
         .modal-container {
@@ -75,7 +74,7 @@ function BookingModal({ isOpen, onClose }) {
           border-radius: 1rem;
           max-width: 920px;
           width: 100%;
-          max-height: 80vh;
+          max-height: 90vh;
           overflow: hidden;
           position: relative;
           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
@@ -87,6 +86,7 @@ function BookingModal({ isOpen, onClose }) {
         @media (min-width: 768px) {
           .modal-container {
             grid-template-columns: 1fr 1fr;
+            max-height: 80vh;
           }
         }
         
@@ -133,7 +133,14 @@ function BookingModal({ isOpen, onClose }) {
           padding: 2rem;
           background: white;
           overflow-y: auto;
-          max-height: 85vh;
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .form-content {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
         }
         
         .custom-input, .custom-txtarea {
@@ -162,7 +169,7 @@ function BookingModal({ isOpen, onClose }) {
         /* Prevent zoom on mobile inputs */
         @media screen and (max-width: 767px) {
           .custom-input, .custom-txtarea {
-            font-size: 16px;
+            font-size: 14px;
           }
         }
         
@@ -207,32 +214,36 @@ function BookingModal({ isOpen, onClose }) {
         
         @media (max-width: 767px) {
           .modal-overlay {
-            align-items: flex-start;
-            padding: 1rem;
+            padding: 2rem;
+            align-items: center;
           }
           
           .modal-container {
-            max-height: none;
-            min-height: auto;
-            border-radius: 1rem;
-            overflow-y: visible;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
+            max-height: 95vh;
+            height: auto;
+            border-radius: 0.75rem;
+            display: flex;
+            flex-direction: column;
           }
           
           .modal-image {
-            min-height: 200px;
+            display: none;
           }
           
           .modal-form-section {
-            padding: 1.5rem;
-            max-height: none;
+            padding: 1.25rem;
             overflow-y: visible;
+            flex: 1;
+            min-height: 0;
+          }
+          
+          .form-content {
+            gap: 0;
           }
           
           .modal-close {
-            top: 0.75rem;
-            right: 0.75rem;
+            top: 0.625rem;
+            right: 0.625rem;
             width: 2rem;
             height: 2rem;
           }
@@ -240,6 +251,46 @@ function BookingModal({ isOpen, onClose }) {
           .modal-close svg {
             width: 16px;
             height: 16px;
+          }
+          
+          .custom-input, .custom-txtarea {
+            padding: 9px 11px;
+            margin-bottom: 0.65rem;
+            font-size: 14px;
+          }
+          
+          .custom-txtarea {
+            min-height: 70px;
+          }
+          
+          .submit-btn {
+            padding: 0.75rem 1.25rem;
+            font-size: 14px;
+            margin-top: 0.25rem;
+          }
+        }
+        
+        @media (max-width: 767px) and (max-height: 700px) {
+          .modal-container {
+            max-height: 98vh;
+          }
+          
+          .modal-form-section {
+            padding: 1rem;
+          }
+          
+          .custom-input, .custom-txtarea {
+            padding: 8px 10px;
+            margin-bottom: 0.5rem;
+          }
+          
+          .custom-txtarea {
+            min-height: 60px;
+          }
+          
+          .submit-btn {
+            padding: 0.65rem 1rem;
+            margin-top: 0;
           }
         }
       `}</style>
@@ -264,90 +315,92 @@ function BookingModal({ isOpen, onClose }) {
 
             {/* Right Side - Form */}
             <div className="modal-form-section">
-              <h2 
-                style={{
-                  fontSize: 'clamp(1.45rem, 4vw, 2.22rem)',
-                  fontWeight: '700',
-                  marginBottom: '1rem',
-                  lineHeight: '1.2'
-                }}
-              >
-                Let's have a conversation today!
-              </h2>
-              
-              <p 
-                style={{
-                  fontSize: 'clamp(0.9rem, 2.5vw, 1rem)',
-                  color: 'rgb(25, 25, 25)',
-                  marginBottom: '1.2rem',
-                  fontWeight: '500'
-                }}
-              >
-                Fill out the form below and we will get back to you as soon as possible.
-              </p>
+              <div className="form-content">
+                <h2 
+                  style={{
+                    fontSize: 'clamp(1.3rem, 4vw, 2.22rem)',
+                    fontWeight: '700',
+                    marginBottom: '0.6rem',
+                    lineHeight: '1.2'
+                  }}
+                >
+                  Let's have a conversation today!
+                </h2>
+                
+                <p 
+                  style={{
+                    fontSize: 'clamp(0.85rem, 2.5vw, 1rem)',
+                    color: 'rgb(25, 25, 25)',
+                    marginBottom: '0.8rem',
+                    fontWeight: '500'
+                  }}
+                >
+                  Fill out the form below and we will get back to you as soon as possible.
+                </p>
 
-              {!isSubmitting && !statusMessage && (
-                <form onSubmit={handleSubmit}>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    className="custom-input"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Enter your name..."
-                    required
-                  />
-                  
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    className="custom-input"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Enter your email id..."
-                    required
-                  />
-                  
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    className="custom-input"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="Enter your phone number..."
-                    required
-                  />
-                  
-                  <textarea
-                    id="message"
-                    name="message"
-                    className="custom-input custom-txtarea"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Write your requirement..."
-                    required
-                  ></textarea>
-                  
-                  <button 
-                    type="submit" 
-                    className="submit-btn"
-                    disabled={isSubmitting}
-                  >
-                    Submit
-                  </button>
-                </form>
-              )}
+                {!isSubmitting && !statusMessage && (
+                  <form onSubmit={handleSubmit}>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      className="custom-input"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Enter your name..."
+                      required
+                    />
+                    
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      className="custom-input"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Enter your email id..."
+                      required
+                    />
+                    
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      className="custom-input"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Enter your phone number..."
+                      required
+                    />
+                    
+                    <textarea
+                      id="message"
+                      name="message"
+                      className="custom-input custom-txtarea"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Write your requirement..."
+                      required
+                    ></textarea>
+                    
+                    <button 
+                      type="submit" 
+                      className="submit-btn"
+                      disabled={isSubmitting}
+                    >
+                      Submit
+                    </button>
+                  </form>
+                )}
 
-              {isSubmitting && (
-                <div className="spinner">Submitting...</div>
-              )}
+                {isSubmitting && (
+                  <div className="spinner">Submitting...</div>
+                )}
 
-              {statusMessage && (
-                <div className="status-message">{statusMessage}</div>
-              )}
+                {statusMessage && (
+                  <div className="status-message">{statusMessage}</div>
+                )}
+              </div>
             </div>
           </div>
         </div>
